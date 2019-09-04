@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-09 16:41-0200\n"
+"PO-Revision-Date: 2018-02-09 16:47-0200\n"
+"Last-Translator: Marcio Massaki Horoiwa <mhoroiwa@br.ibm.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: lms/templates/certificates/_accomplishment-rendering.html:37
+msgid "This is to certify that"
+msgstr "以此证明"
+
+#: lms/templates/certificates/_accomplishment-rendering.html:40
+msgid "successfully completed and received a passing grade in"
+msgstr "成功的完成了课程并通过了测试"
+
+#: lms/templates/certificates/_accomplishment-rendering.html:46
+#, python-brace-format
+msgid "{course_number}, provided by {strong_start}{course_org}{strong_end}"
+msgstr "由{strong_start}{course_org}{strong_end} 提供的{course_number}"
+
+#: lms/templates/certificates/_accomplishment-rendering.html:57
+#, python-brace-format
+msgid ""
+"an online course on {link_start}{strong_start}{portal_url}{strong_end}"
+"{link_end}, a member of the {strong_start}IBM Cognitive Class{strong_end} "
+"skills network."
+msgstr ""
+"一门来自 {link_start}{strong_start}{portal_url}{strong_end}{link_end} "
+"的在线课程，{strong_start}IBM 认知学堂{strong_end} 的培训合作成员之一"
+
+#: lms/templates/certificates/_accomplishment-rendering.html:70
+msgid "Issued on:"
+msgstr "签发日期："
+
+#: lms/templates/certificates/_accomplishment-rendering.html:75
+msgid "Authenticity of this certificate can be validated by going to:"
+msgstr "认证证书可在线进行验证，请通过"
+
+#: lms/templates/header.html:19
+msgid "Learning Paths"
+msgstr "学习路径"
+
+#: lms/templates/header.html:22
+msgid "Courses"
+msgstr "课程"
+
+#: lms/templates/header.html:26
+msgid "Competitions"
+msgstr "竞赛"
+
+#: lms/templates/header.html:44
+msgid "Register"
+msgstr "注册"
+
+#: lms/templates/header.html:49
+msgid "Sign in"
+msgstr "登录"

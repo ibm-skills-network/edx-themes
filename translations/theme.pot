@@ -1,0 +1,124 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-14 14:27-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: lms/templates/static_templates/tos.html:10
+#: lms/templates/static_templates/tos.html:14
+msgid "Terms of Service"
+msgstr ""
+
+#: lms/templates/static_templates/tos.html:16
+#, python-brace-format
+msgid "Redirecting to {linkBegin}Terms of Service{linkEnd}..."
+msgstr ""
+
+#: lms/templates/static_templates/privacy.html:10
+#: lms/templates/static_templates/privacy.html:14 lms/templates/footer.html:25
+msgid "Privacy Notice"
+msgstr ""
+
+#: lms/templates/static_templates/privacy.html:16
+#, python-brace-format
+msgid "Redirecting to {linkBegin}Privacy Notice{linkEnd}..."
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:37
+msgid "This is to certify that"
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:40
+msgid "successfully completed and received a passing grade in"
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:46
+#, python-brace-format
+msgid "{course_number}, provided by {strong_start}{course_org}{strong_end}"
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:57
+#, python-brace-format
+msgid ""
+"an online course on {link_start}{strong_start}{portal_url}{strong_end}"
+"{link_end}."
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:66
+#, python-brace-format
+msgid "Issued by {strong_start}{site_name}{strong_end}."
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:73
+#, python-brace-format
+msgid "Powered by {strong_start}IBM Developer Skills Network{strong_end}."
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:82
+msgid "Issued on:"
+msgstr ""
+
+#: lms/templates/certificates/_accomplishment-rendering.html:87
+msgid "Authenticity of this certificate can be validated by going to:"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:15 lms/templates/user_dropdown.html:45
+msgid "Dashboard for:"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:26
+msgid "Usermenu dropdown"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:32
+msgid "Admin"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:34
+msgid "Dashboard"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:36
+msgid "Account"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:38 lms/templates/user_dropdown.html:58
+msgid "Sign Out"
+msgstr ""
+
+#: lms/templates/user_dropdown.html:55
+msgid "More options dropdown"
+msgstr ""
+
+#: lms/templates/header.html:19
+msgid "Learning Paths"
+msgstr ""
+
+#: lms/templates/header.html:22
+msgid "Courses"
+msgstr ""
+
+#: lms/templates/header.html:26
+msgid "Competitions"
+msgstr ""
+
+#: lms/templates/header.html:44
+msgid "Register"
+msgstr ""
+
+#: lms/templates/header.html:49
+msgid "Sign in"
+msgstr ""

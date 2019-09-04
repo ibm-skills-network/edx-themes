@@ -1,0 +1,257 @@
+%rendering-accomplishment-line {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+@mixin cert-corner-decor($size, $offset, $border, $shadow-color, $corner) {
+  $corner-v: nth($corner, 1);
+  $corner-h: nth($corner, 2);
+
+  position: absolute;
+  height: $size;
+  width: $size;
+  background-color: #fff;
+
+  @if $corner-v == top {
+    top: $offset;
+    border-bottom: $border;
+  } @else if $corner-v == bottom {
+    bottom: $offset;
+    border-top: $border;
+  }
+
+  @if $corner-h == left {
+    left: $offset;
+    border-right: $border;
+  } @else if $corner-h == right {
+    right: $offset;
+    border-left: $border;
+  }
+
+  box-shadow: if($corner-h == left, 1px, -1px) if($corner-v == top, 1px, -1px)
+    1px lighten($shadow-color, 40%);
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: $size / 2;
+    height: $size / 2;
+    border: $border;
+    box-shadow: 0 0 2px $shadow-color inset;
+    @if ($corner-v == top) or ($corner-v == bottom) {
+      #{$corner-v}: 0;
+    }
+    @if ($corner-h == left) or ($corner-h == right) {
+      #{$corner-h}: 0;
+    }
+  }
+}
+
+.accomplishment-rendering {
+  background: #fff url("../images/bg-cc.png") center/80% no-repeat;
+  border: 1px solid $cert-border-color;
+  padding: $cert-border-thickness;
+  box-shadow: 0 0 2px $cert-shadow-color;
+
+  .accomplishment-certificate {
+    font-size: 14px;
+    padding: $cert-padding $cert-padding/2 $cert-padding/2;
+    border: 1px solid $cert-border-color;
+    box-shadow: 0 0 2px $cert-shadow-color inset;
+
+    @media(min-width: $bp-screen-sm) {
+      padding-left: $cert-padding;
+      padding-right: $cert-padding;
+      font-size: 16px;
+    }
+  }
+
+  .cert-corner-tl {
+    @include cert-corner-decor(
+      14px,
+      $cert-border-thickness,
+      1px solid $cert-border-color,
+      $cert-shadow-color,
+      top left
+    );
+  }
+
+  .cert-corner-tr {
+    @include cert-corner-decor(
+      14px,
+      $cert-border-thickness,
+      1px solid $cert-border-color,
+      $cert-shadow-color,
+      top right
+    );
+  }
+
+  .cert-corner-bl {
+    @include cert-corner-decor(
+      14px,
+      $cert-border-thickness,
+      1px solid $cert-border-color,
+      $cert-shadow-color,
+      bottom left
+    );
+  }
+
+  .cert-corner-br {
+    @include cert-corner-decor(
+      14px,
+      $cert-border-thickness,
+      1px solid $cert-border-color,
+      $cert-shadow-color,
+      bottom right
+    );
+  }
+
+  // headings
+  .hd-1 {
+    font-size: 24px;
+
+    @media (min-width: 320px) {
+      font-size: 27px;
+    }
+
+    @media(min-width: $bp-screen-sm) {
+      font-size: 38px;
+    }
+  }
+
+  .accomplishment-org {
+    text-align: center;
+
+    @media(min-width: $bp-screen-sm) {
+      float: left;
+    }
+
+    .organization-logo {
+      max-height: 80px;
+      max-width: 100%;
+      margin-bottom: 40px;
+    }
+  }
+
+  #qrcode {
+    display: none;
+    margin-bottom: 20px;
+
+    @media(min-width: $bp-screen-sm) {
+      display: block;
+      float: right;
+      position: relative;
+      top: -16px;
+      margin: 0;
+    }
+
+    img {
+      padding: 5px;
+      border: 1px solid #000;
+      background-color: #fff;
+      margin: auto;
+    }
+  }
+
+  .accomplishment-statement {
+    border-bottom: 0;
+    margin-left: -$cert-padding/2;
+    margin-right: -$cert-padding/2;
+    padding: 20px $cert-padding/2;
+    background: #eee9;
+
+    @media(min-width: $bp-screen-sm) {
+      margin-left: -$cert-padding;
+      margin-right: -$cert-padding;
+      padding-left: $cert-padding;
+      padding-right: $cert-padding;
+    }
+  }
+
+  .accomplishment-statement-lead {
+    font-size: 14px;
+    line-height: 1.5;
+
+    @media(min-width: $bp-screen-sm) {
+      font-size: 16px;
+    }
+  }
+
+  .accomplishment-intro {
+    @extend .accomplishment-summary;
+    margin-bottom: 20px;
+  }
+
+  .accomplishment-recipient {
+    @extend %rendering-accomplishment-line;
+  }
+
+  .accomplishment-summary {
+    @extend %rendering-accomplishment-line;
+  }
+
+  .accomplishment-course {
+    @extend %rendering-accomplishment-line;
+
+    span {
+      display: block;
+    }
+  }
+
+  .accomplishment-course-number-and-org {
+    font-size: 14px;
+    font-weight: 400;
+    color: $cert-text-color;
+
+    @media(min-width: $bp-screen-sm) {
+      font-size: 16px;
+    }
+  }
+
+  .accomplishment-statement-detail {
+    @extend %rendering-accomplishment-line;
+    line-height: 1.5;
+    margin-bottom: 0;
+    color: $cert-text-color;
+
+    &.accomplishment-statement-issuer {
+      margin: 20px 0;
+
+      strong {
+        font-size: 24px;
+        display: block;
+      }
+    }
+  }
+
+  .accomplishment-footer {
+    font-size: 12px;
+    text-align: center;
+
+    span {
+      display: block;
+    }
+
+    .value {
+      font-weight: 700;
+    }
+  }
+
+  .accomplishment-date {
+    margin-bottom: 10px;
+
+    .value {
+      font-size: 14px;
+
+      @media(min-width: $bp-screen-sm) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .accomplishment-validation-link {
+    .value {
+      word-break: break-all;
+    }
+  }
+}
