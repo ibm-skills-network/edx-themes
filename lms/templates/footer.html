@@ -3,7 +3,6 @@
 <%!
   from django.urls import reverse
   from django.utils.translation import ugettext as _
-  from edxmako.shortcuts import marketing_link
   from branding.api import get_footer
   from openedx.core.djangoapps.lang_pref.api import footer_language_selector_is_enabled
 %>
@@ -17,43 +16,32 @@
         <div class="col-md-9">
           <nav class="navbar site-nav navbar-expand-sm" aria-label="${_('About')}">
             <ul class="navbar-nav">
-              % for item_num, link in enumerate(footer['navigation_links'], start=1):
-                <li class="nav-item">
-                  <a class="nav-link" href="${link['url']}">${link['title']}</a>
-                </li>
-              % endfor
-            </ul>
-          </nav>
-
-          ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
-          <p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
-
-          <nav class="navbar legal-nav navbar-expand-sm" aria-label="${_('Legal')}">
-            <ul class="navbar-nav">
-              % for item_num, link in enumerate(footer['legal_links'], start=1):
-                <li class="nav-item">
-                  <a class="nav-link" href="${link['url']}">${link['title']}</a>
-                </li>
-              % endfor
               <li class="nav-item">
-                <a class="nav-link" href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a>
+                <a href="${marketing_link('PRIVACY')}">${_("Privacy Notice")}</a>
               </li>
+              % for item_num, link in enumerate(settings.FOOTER_NAVIGATION_LINKS, start=1):
+              <li class="nav-item">
+                <a class="nav-link" href="${link['url']}">${link['title']}</a>
+              </li>
+              % endfor
             </ul>
           </nav>
+          
         </div>
         <div class="col-md-3">
           ## Please leave this link and use one of the logos provided
           ## The OpenEdX link may be hidden when this view is served
           ## through an API to partner sites (such as marketing sites or blogs),
           ## which are not technically powered by Open edX.
-          % if not hide_openedx_link:
-            <div class="footer-about-openedx">
-              <p>
-                <a href="${footer['openedx_link']['url']}">
-                  <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
-                </a>
-              </p>
-            </div>
+          % if settings.SHOW_POWERED_BY_LOGO:
+          <div class="footer-about-openedx">
+            <p class="powered-by">Powered by</p>
+              <a href="https://cognitiveclass.ai">
+                <img src="${static.url('images/cc-footer.png')}" alt="Powered by IBM Skills Network" width="140" />
+                IBM<br>Skills Network
+              </a>
+            </p>
+          </div>
           % endif
         </div>
       </div>
@@ -77,17 +65,16 @@
             </li>
             % for item_num, link in enumerate(settings.FOOTER_NAVIGATION_LINKS, start=1):
               <li class="nav-colophon-0${item_num}">
-                <a href="${link['url']}">${link['title']}</a>
+                <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
               </li>
             % endfor
           </ol>
         </nav>
 
-        % if context.get('include_language_selector', footer_language_selector_is_enabled()):
-            <%include file="${static.get_template_path('widgets/footer-language-selector.html')}"/>
-        % endif
-
+        ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
+        <p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
       </div>
+
 
       % if settings.SHOW_POWERED_BY_LOGO:
         <div class="footer-about-openedx">
@@ -98,8 +85,9 @@
           </a>
         </div>
       % endif
+
     </footer>
-    
+
     % if settings.FOOTER_FOOTNOTE:
       <footer class="footer">
           <p class="footnote">${settings.FOOTER_FOOTNOTE}</p>
@@ -116,7 +104,6 @@
     </script>
   </div>
 % endif
-
 % if include_dependencies:
   <%static:js group='base_vendor'/>
   <%static:css group='style-vendor'/>
