@@ -1,5 +1,16 @@
 <%page expression_filter="h"/>
-<%! from django.utils.translation import ugettext as _ %>
+<%! 
+from django.utils.translation import ugettext as _
+
+from openedx.core.djangolib.markup import HTML, Text
+
+def strip_scheme(url):
+  if url is not None:
+    url = url.replace('http://', '', 1)
+    url = url.replace('https://', '', 1)
+  return url 
+%>
+
 <%namespace name='static' file='../static_content.html'/>
 <%
 course_mode_class = course_mode if course_mode else ''
@@ -14,25 +25,17 @@ course_mode_class = course_mode if course_mode else ''
             <span class="deco-corner deco-corner-bl"></span>
             <span class="deco-corner deco-corner-br"></span>
 
-            <div class="accomplishment-type">
-                <span class="accomplishment-type-symbol">
-                    <img class="src" src="/static/certificates/images/ico-${course_mode_class}.png" alt="Image for course mode of type ${course_mode_class}">
-                </span>
-
-                <span class="accomplishment-type-label hd-3">${document_title}</span>
-            </div>
-
             <div class="wrapper-statement-and-signatories">
                 <div class="accomplishment-statement">
                     <p class="accomplishment-statement-lead">
+                        <span class="accomplishment-intro">${_("This is to certify that")}</span>
                         <strong class="accomplishment-recipient hd-1 emphasized">${accomplishment_copy_name}</strong>
-                        <span class="accomplishment-summary copy copy-lead">${accomplishment_copy_description_full}</span>
+                        <span class="accomplishment-summary copy copy-lead">${_("successfully completed and received a passing grade in")}</span>
 
                         <span class="accomplishment-course hd-1 emphasized">
-                            <span class="accomplishment-course-org">${accomplishment_copy_course_org}  </span>
-                            <span class="accomplishment-course-number">${course_number}</span>:
                             <span class="accomplishment-course-name">${accomplishment_copy_course_name}</span>
                         </span>
+                        <span class="accomplishment-course-number-and-org">(${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(course_number=course_number, strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), course_org=organization_short_name, )})</span>
                     </p>
 
                     <p class="accomplishment-statement-detail copy copy-lead">${accomplishment_copy_course_description}</p>
@@ -63,24 +66,18 @@ course_mode_class = course_mode if course_mode else ''
                 % endif
             </div>
 
-            <div class="accomplishment-orgs">
-                <h3 class="accomplishment-orgs-title sr-only">${_("Supported by the following organizations")}</h3>
+            <div>
+                <div class="accomplishment-orgs">
+                    <ul class="wrapper-orgs list-orgs">
+                        <li class="wrapper-organization">
+                            <div class="organization">
+                                <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                <ul class="wrapper-orgs list-orgs">
-                    <li class="wrapper-organization">
-                        <div class="organization organization-edX">
-                            <img class="organization-logo" src="${logo_src}" alt="${platform_name}">
-                        </div>
-                    </li>
-
-                    % if organization_logo:
-                    <li class="wrapper-organization">
-                        <div class="organization">
-                            <img class="organization-logo" src="${organization_logo.url}" alt="${platform_name}">
-                        </div>
-                    </li>
-                    % endif
-                </ul>
+                <div id="qrcode"></div>
             </div>
         </div>
     </div>
@@ -115,3 +112,12 @@ course_mode_class = course_mode if course_mode else ''
     </div>
 
 </main>
+
+<script src="${static.url('js/vendor/qrcode.min.js')}"></script>
+<script type="text/javascript">
+  new QRCode(document.getElementById("qrcode"), {
+    text: "${share_url}",
+    width: 100,
+    height: 100
+  });
+</script>
