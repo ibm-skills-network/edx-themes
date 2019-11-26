@@ -25,6 +25,20 @@ course_mode_class = course_mode if course_mode else ''
             <span class="deco-corner deco-corner-bl"></span>
             <span class="deco-corner deco-corner-br"></span>
 
+            <div>
+                <div class="accomplishment-orgs">
+                    <ul class="wrapper-orgs list-orgs">
+                        <li class="wrapper-organization">
+                            <div class="organization">
+                                <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div id="qrcode"></div>
+            </div>
+
             <div class="wrapper-statement-and-signatories">
                 <div class="accomplishment-statement">
                     <p class="accomplishment-statement-lead">
@@ -64,20 +78,6 @@ course_mode_class = course_mode if course_mode else ''
                     </div>
                 </div>
                 % endif
-            </div>
-
-            <div>
-                <div class="accomplishment-orgs">
-                    <ul class="wrapper-orgs list-orgs">
-                        <li class="wrapper-organization">
-                            <div class="organization">
-                                <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div id="qrcode"></div>
             </div>
         </div>
     </div>
