@@ -48,7 +48,46 @@ course_mode_class = course_mode if course_mode else ''
                         </p>
                         <p class="accomplishment-statement-detail copy copy-lead">${Text(_("an online course on {strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
                     </div>
+
+
+                    % if mode != 'base':
+                    <div class="accomplishment-signatories">
+                        <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
+
+                        <div class="wrapper-signatories">
+                            <div class="list-signatories">
+                                % if certificate_data:
+                                    % for signatory in certificate_data.get('signatories', []):
+                                    <div class="signatory">
+                                        <img class="signatory-signature" src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}">
+
+                                        <h4 class="signatory-name hd-5">${signatory['name']}</h4>
+                                        <p class="signatory-credentials copy copy-micro">
+                                            <span class="role">${signatory['title']}</span>
+                                            <span class="organization">${signatory['organization']}</span>
+                                        </p>
+                                    </div>
+                                    % endfor
+                                % endif
+                            </div>
+                        </div>
+                    </div>
+                    % endif
                 </div>
+
+                <div class="accomplishment-footer">
+                    <div class="accomplishment-date">
+                      <span class="label">${_("Issued on:")}</span>
+                      <span class="value">${certificate_date_issued}</span>
+                    </div>
+                    <div class="accomplishment-validation-link">
+                      <span class="label">
+                        ${_("Authenticity of this certificate can be validated by going
+                        to:")}
+                      </span>
+                      <span class="value"><a href="${share_url}">${share_url}</a></span>
+                    </div>
+                  </div>
             </div>
         </div>
     </div>

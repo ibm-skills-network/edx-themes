@@ -320,6 +320,37 @@
     @extend %rendering-accomplishment-line;
   }
 
+  .accomplishment-footer {
+    font-size: 12px;
+    text-align: center;
+
+    span {
+      display: block;
+    }
+
+    .value {
+      font-weight: 700;
+    }
+  }
+
+  .accomplishment-date {
+    margin-bottom: 10px;
+
+    .value {
+      font-size: 14px;
+
+      @media(min-width: $bp-screen-sm) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .accomplishment-validation-link {
+    .value {
+      word-break: break-all;
+    }
+  }
+  
   // organizations
 
   .accomplishment-org {
@@ -575,8 +606,9 @@
   }
 
   .accomplishment-rendering {
-    background: #fff url("../images/bg-cc.png") center/80% no-repeat;
+    background: #fff url("../images/bg-cc.png") center no-repeat;
     border: 1px solid $cert-border-color;
+    background-size: 65%;
     padding: $cert-border-thickness;
     box-shadow: 0 0 2px $cert-shadow-color;
 
