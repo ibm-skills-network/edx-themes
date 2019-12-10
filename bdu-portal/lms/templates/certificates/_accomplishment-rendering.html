@@ -49,6 +49,20 @@ course_mode_class = course_mode if course_mode else ''
                         <p class="accomplishment-statement-detail copy copy-lead">${Text(_("an online course on {strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
                     </div>
                 </div>
+
+                <div class="accomplishment-footer">
+                    <div class="accomplishment-date">
+                      <span class="label">${_("Issued on:")}</span>
+                      <span class="value">${certificate_date_issued}</span>
+                    </div>
+                    <div class="accomplishment-validation-link">
+                      <span class="label">
+                        ${_("Authenticity of this certificate can be validated by going to:")}
+                      </span>
+                      <span class="value"><a href="${share_url}">${share_url}</a></span>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
