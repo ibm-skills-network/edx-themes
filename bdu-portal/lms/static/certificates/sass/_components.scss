@@ -319,6 +319,36 @@
   .accomplishment-statement-detail {
     @extend %rendering-accomplishment-line;
   }
+  .accomplishment-footer {
+    font-size: 12px;
+    text-align: center;
+
+    span {
+      display: block;
+    }
+
+    .value {
+      font-weight: 700;
+    }
+  }
+
+  .accomplishment-date {
+    margin-bottom: 10px;
+
+    .value {
+      font-size: 14px;
+
+      @media(min-width: $bp-screen-sm) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .accomplishment-validation-link {
+    .value {
+      word-break: break-all;
+    }
+  }
 
   .accomplishment-footer {
     font-size: 12px;
