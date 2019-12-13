@@ -620,7 +620,8 @@
     // hide the fancy
     .accomplishment-signatories .signatory-signature,
     .accomplishment-type-symbol {
-      // display: none;
+      display: block;
+      margin: 0 auto spacing-vertical(x-small) auto;
     }
   }
 }
