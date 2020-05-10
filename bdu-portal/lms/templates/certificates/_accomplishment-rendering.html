@@ -1,5 +1,4 @@
-<%namespace name='static' file='../static_content.html'/>
-
+<%page expression_filter="h"/>
 <%!
 from django.utils.translation import ugettext as _
 
@@ -12,93 +11,127 @@ def strip_scheme(url):
   return url
 %>
 
+<%namespace name='static' file='../static_content.html'/>
 <%
 course_mode_class = course_mode if course_mode else ''
 %>
 
-<div class="wrapper-accomplishment-rendering">
-  <div class="accomplishment-rendering">
-    <div class="accomplishment-certificate">
-      <span class="cert-corner cert-corner-tl"></span>
-      <span class="cert-corner cert-corner-tr"></span>
-      <span class="cert-corner cert-corner-bl"></span>
-      <span class="cert-corner cert-corner-br"></span>
+<main class="accomplishment accomplishment-main">
 
-      <div class="wrapper">
-        <div class="accomplishment-org">
-          <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
+    <div class="wrapper-accomplishment-rendering">
+        <div class="accomplishment-rendering">
+            <div class="accomplishment-certificate">
+                <span class="deco-corner deco-corner-tl"></span>
+                <span class="deco-corner deco-corner-tr"></span>
+                <span class="deco-corner deco-corner-bl"></span>
+                <span class="deco-corner deco-corner-br"></span>
+
+                <div class="wrapper">
+                    <div class="accomplishment-org" style="padding: 20px;margin-bottom: -30px;position: relative;top: 5px;">
+                        <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
+                    </div>
+
+                    <div id="qrcode" style="padding: 10px;margin-bottom: 5px;"></div>
+                </div>
+
+                <div class="background-tint" style="background-color: rgba(224, 224, 224, 0.5);">
+                  <div class="wrapper-statement-and-signatories">
+                      <div class="accomplishment-statement">
+                          <p class="accomplishment-statement-lead">
+                              <span class="accomplishment-intro" style="color: #4e4e4e;">${_("This is to certify that")}</span>
+                              <strong class="accomplishment-recipient hd-1 emphasized" style="margin-top:30px;">${accomplishment_copy_name}</strong>
+                              <span class="accomplishment-summary copy copy-lead">${_("successfully completed and received a passing grade in")}</span>
+
+                              <span class="accomplishment-course hd-1 emphasized" style="margin-bottom:0;">
+                                  <span class="accomplishment-course-name">${accomplishment_copy_course_name}</span>
+                              </span>
+                              <span class="accomplishment-course-number-and-org" style="color: #4e4e4e;">(${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(course_number=course_number, strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), course_org=organization_short_name, )})</span>
+                          </p>
+                          <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_url=platform_url, )}</p>
+                          <p style="color: #4e4e4e;">Powered by <strong>IBM Developer Skills Network.</strong></p>
+                          <p style="margin-bottom:0;color: #4e4e4e;">Issued by</p>
+                          <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
+                      </div>
+
+
+                      % if mode != 'base':
+                      <div class="accomplishment-signatories">
+                          <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
+
+                          <div class="wrapper-signatories">
+                              <div class="list-signatories">
+                                  % if certificate_data:
+                                      % for signatory in certificate_data.get('signatories', []):
+                                      <div class="signatory">
+                                          <img class="signatory-signature" src="${static.url(signatory['signature_image_path'])}" alt="${signatory['name']}">
+
+                                          <h4 class="signatory-name hd-5">${signatory['name']}</h4>
+                                          <p class="signatory-credentials copy copy-micro">
+                                              <span class="role">${signatory['title']}</span>
+                                              <span class="organization">${signatory['organization']}</span>
+                                          </p>
+                                      </div>
+                                      % endfor
+                                  % endif
+                              </div>
+                          </div>
+                      </div>
+                      % endif
+                  </div>
+                </div>
+
+                <div class="accomplishment-footer" style="margin:20px;">
+                    <div class="accomplishment-date">
+                      <span class="label">${_("Issued on:")}</span>
+                      <span class="value">${certificate_date_issued}</span>
+                    </div>
+                    <div class="accomplishment-validation-link">
+                      <span class="label">
+                        ${_("Authenticity of this certificate can be validated by going to:")}
+                      </span>
+                      <span class="value"><a href="${share_url}">${share_url}</a></span>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div id="qrcode"></div>
-      </div>
-
-      <div class="accomplishment-statement">
-        <p class="accomplishment-statement-lead">
-          <span class="accomplishment-intro">${_("This is to certify that")}</span>
-          <strong class="accomplishment-recipient hd-1 emphasized">${accomplishment_copy_name | h}</strong>
-          <span class="accomplishment-summary">
-            ${_("successfully completed and received a passing grade in")}
-          </span>
-
-          <span class="accomplishment-course hd-1 emphasized">
-            <span class="accomplishment-course-name">${accomplishment_copy_course_name}</span>
-            <span class="accomplishment-course-number-and-org">
-              (${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(
-                course_number=course_number,
-                strong_start=HTML("<strong>"),
-                strong_end=HTML("</strong>"),
-                course_org=organization_short_name,
-              )})
-            </span>
-          </span>
-        </p>
-
-        <p class="accomplishment-statement-detail">
-          ${Text("a course on {link_start}{strong_start}{portal_url}{strong_end}{link_end}.").format(
-            link_start=HTML('<a href="{url}">').format(url=settings.PRIVATE_PORTAL_URL),
-            link_end=HTML("</a>"),
-            strong_start=HTML("<strong>"),
-            strong_end=HTML("</strong>"),
-            portal_url=strip_scheme(settings.PRIVATE_PORTAL_URL),
-          )}
-        </p>
-        <p class="accomplishment-statement-detail">
-            ${Text("Powered by {strong_start}IBM Developer Skills Network{strong_end}.").format(
-              strong_start=HTML("<strong>"),
-              strong_end=HTML("</strong>")
-            )}
-        </p>
-        <p class="accomplishment-statement-detail accomplishment-statement-issuer">
-            ${Text("Issued by {strong_start}{site_name}{strong_end}").format(
-              strong_start=HTML("<strong>"),
-              strong_end=HTML("</strong>"),
-              site_name=settings.PLATFORM_NAME
-            )}
-          </p>
-      </div>
-
-      <div class="accomplishment-footer">
-        <div class="accomplishment-date">
-          <span class="label">${_("Issued on:")}</span>
-          <span class="value">${certificate_date_issued}</span>
-        </div>
-        <div class="accomplishment-validation-link">
-          <span class="label">
-            ${_("Authenticity of this certificate can be validated by going to:")}
-          </span>
-          <span class="value"><a href="${share_url}">${share_url}</a></span>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
 
+    <div class="wrapper-accomplishment-metadata">
+        <div class="accomplishment-metadata">
+            <h2 class="accomplishment-metadata-title hd-6">${accomplishment_copy_more_about}</h2>
+
+            <div class="wrapper-metadata">
+                <dl class="metadata accomplishment-recipient">
+                    <dt class="label sr-only">${_("Awarded to:")}</dt>
+                    <dd class="value copy copy-meta">
+                        <span class="recipient-img">
+                            <img class="src" src="/static/certificates/images/demo-user-profile.png" alt="Recipient Image">
+                        </span>
+                        <div class="recipient-details">
+                            <h3 class="recipient-name">${accomplishment_copy_name}</h3>
+                            <p class="recipient-username">${accomplishment_copy_username} @ ${platform_name}</p>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="metadata accomplishment-id">
+                    <dt class="label copy copy-meta">${certificate_id_number_title}:</dt>
+                    <dd class="value copy copy-base">${certificate_id_number}</dd>
+                </dl>
+                <dl class="metadata accomplishment-date">
+                    <dt class="label copy copy-meta">${certificate_date_issued_title}</dt>
+                    <dd class="value copy copy-base">${certificate_date_issued}</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+
+</main>
 
 <script src="${static.url('js/vendor/qrcode.min.js')}"></script>
 <script type="text/javascript">
   new QRCode(document.getElementById("qrcode"), {
     text: "${share_url}",
     width: 100,
-    height: 100,
+    height: 100
   });
 </script>
