@@ -36,7 +36,7 @@ course_mode_class = course_mode if course_mode else ''
 
                 <div class="background-tint" style="background-color: rgba(224, 224, 224, 0.5);">
                   <div class="wrapper-statement-and-signatories">
-                      <div class="accomplishment-statement">
+                      <div class="accomplishment-statement" style="padding-bottom: 0;border-bottom: 0;margin-bottom: 0;">
                           <p class="accomplishment-statement-lead">
                               <span class="accomplishment-intro" style="color: #4e4e4e;">${_("This is to certify that")}</span>
                               <strong class="accomplishment-recipient hd-1 emphasized" style="margin-top:30px;">${accomplishment_copy_name}</strong>
@@ -45,9 +45,9 @@ course_mode_class = course_mode if course_mode else ''
                               <span class="accomplishment-course hd-1 emphasized" style="margin-bottom:0;">
                                   <span class="accomplishment-course-name">${accomplishment_copy_course_name}</span>
                               </span>
-                              <span class="accomplishment-course-number-and-org" style="color: #4e4e4e;">(${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(course_number=course_number, strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), course_org=organization_short_name, )})</span>
+                              <span class="accomplishment-course-number-and-org" style="color: #4e4e4e;top: -15px;position: relative;font-size: 1rem;">(${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(course_number=course_number, strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), course_org=organization_short_name, )})</span>
                           </p>
-                          <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_url=platform_url, )}</p>
+                          <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_url=strip_scheme(settings.PRIVATE_PORTAL_URL), )}</p>
                           <p style="color: #4e4e4e;">Powered by <strong>IBM Developer Skills Network.</strong></p>
                           <p style="margin-bottom:0;color: #4e4e4e;">Issued by</p>
                           <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
@@ -55,7 +55,7 @@ course_mode_class = course_mode if course_mode else ''
 
 
                       % if mode != 'base':
-                      <div class="accomplishment-signatories">
+                      <div class="accomplishment-signatories" style="padding-bottom: 0;border-bottom: 0;margin-bottom: 0;">
                           <h3 class="accomplishment-signatories-title sr-only">${_("Noted by")}</h3>
 
                           <div class="wrapper-signatories">
