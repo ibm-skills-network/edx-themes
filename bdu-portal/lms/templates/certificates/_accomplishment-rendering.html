@@ -28,7 +28,11 @@ course_mode_class = course_mode if course_mode else ''
 
                 <div class="wrapper">
                     <div class="accomplishment-org" style="padding: 20px;margin-bottom: -30px;position: relative;top: 5px;">
+                      % if certificate_logo_src and certificate_logo_url:
+                        <a href="${certificate_logo_url}"><img class="organization-logo" alt="Organization Logo" src="${certificate_logo_src}" /></a>
+                      % else:
                         <img class="organization-logo" src="${static.url('certificates/images/ibm-logo.png')}" alt="IBM">
+                      % endif
                     </div>
 
                     <div id="qrcode" style="padding: 10px;margin-bottom: 5px;top: 0px;"></div>
