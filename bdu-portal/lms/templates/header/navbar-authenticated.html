@@ -28,66 +28,11 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 
 <div class="nav-links">
   <div class="main">
-    % if show_dashboard_tabs:
-      <!-- <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-        <a class="${'active ' if reverse('dashboard') == request.path else ''}tab-nav-link" href="${reverse('dashboard')}"
-             aria-current="${'page' if reverse('dashboard') == request.path else 'false'}">
-             ${_("Courses")}
-        </a>
-      </div> -->
-      % if show_program_listing:
-        <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-          <a class="${'active ' if reverse('program_listing_view') in request.path else ''}tab-nav-link" href="${reverse('program_listing_view')}"
-             aria-current="${'page' if reverse('program_listing_view') == request.path else 'false'}">
-             ${_("Programs")}
-          </a>
-        </div>
-      % endif
-      % if show_journal_listing:
-        <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-          <a class="${'active ' if reverse('openedx.journals.dashboard') in request.path else ''}tab-nav-link" href="${reverse('openedx.journals.dashboard')}"
-             aria-current="${'page' if reverse('openedx.journals.dashboard') == request.path else 'false'}">
-             ${_("Journals")}
-          </a>
-        </div>
-      % endif
-      <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-          <a class="tab-nav-link" href="${settings.PRIVATE_PORTAL_URL}">
-             ${_("Learning Paths")}
-          </a>
-      </div>
-    % endif
-
-    % if show_explore_courses:
-      <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-          <a class="tab-nav-link" href="${marketing_link('COURSES')}"
-             aria-current="${'page' if '/courses' in request.path else 'false'}">
-             ${_('Courses')}
-          </a>
-      </div>
-    % endif
-
-    % if settings.COMPETITIONS_ENABLED:
-      <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-        <a class="tab-nav-link" href="${settings.COMPETITIONS_URL}">
-          ${_('Competitions')}
-        </a>
-      </div>
-    % endif
-
-    % if show_sysadmin_dashboard:
-      <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-        ## Translators: This is short for "System administration".
-        <a class="tab-nav-link" href="${reverse('sysadmin')}">${_("Sysadmin")}</a>
-      </div>
-    % endif
-
     % for item_num, link in enumerate(settings.HEADER_NAVIGATION_LINKS, start=4):
       <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
         <a class="tab-nav-link" href="${link['url']}">${link['title']}</a>
       </div>
     % endfor
-
   </div>
   <div class="secondary">
     % if should_display_shopping_cart_func() and not (course and static.is_request_in_themed_site()): # see shoppingcart.context_processor.user_has_cart_context_processor
