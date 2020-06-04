@@ -14,6 +14,9 @@ def strip_scheme(url):
 <%namespace name='static' file='../static_content.html'/>
 <%
 course_mode_class = course_mode if course_mode else ''
+platform_url_color = certificate_primary_color if certificate_primary_color else "#4e4e4e"
+platform_name_color = certificate_primary_color if certificate_primary_color else "black"
+share_url_color = certificate_primary_color if certificate_primary_color else "#065683"
 %>
 
 <main class="accomplishment accomplishment-main">
@@ -51,10 +54,10 @@ course_mode_class = course_mode if course_mode else ''
                               </span>
                               <span class="accomplishment-course-number-and-org" style="color: #4e4e4e;top: -15px;position: relative;font-size: 1rem;">(${Text(_("{course_number}, provided by {strong_start}{course_org}{strong_end}")).format(course_number=course_number, strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), course_org=organization_short_name, )})</span>
                           </p>
-                          <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_url=strip_scheme(settings.PRIVATE_PORTAL_URL), )}</p>
+                          <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong style=\"color: " + platform_url_color + "\">"), strong_end=HTML("</strong>"), platform_url=strip_scheme(settings.PRIVATE_PORTAL_URL), )}</p>
                           <p style="color: #4e4e4e;">Powered by <strong>IBM Developer Skills Network.</strong></p>
                           <p style="margin-bottom:0;color: #4e4e4e;">Issued by</p>
-                          <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong>"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
+                          <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong style=\"color: " + platform_name_color + "\">"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
                       </div>
 
 
@@ -95,7 +98,7 @@ course_mode_class = course_mode if course_mode else ''
                       <span class="label">
                         ${_("Authenticity of this certificate can be validated by going to:")}
                       </span>
-                      <span class="value"><a href="${share_url}">${share_url}</a></span>
+                      <span class="value"><a href="${share_url}" style="color: ${share_url_color};">${share_url}</a></span>
                     </div>
                 </div>
             </div>
