@@ -50,11 +50,11 @@
        </div>
      </div>
      <script>
-      function loadImage(){
-        var url = window.location.href.replace('://', '');
-        var course = url.substring(str.indexOf(":"))
-        signature_image_path = signature_image_path.replace(signature_image_path.substring(signature_image_path.indexOf(':'), signature_image_path.indexOf('+type')), course);
-      }
-      window.onload = loadImage();
+       function loadImage(){
+         var url = window.location.href.replace('://', '');
+         var course = url.substring(url.indexOf(":"))
+         signature_image_path = signature_image_path.replace(signature_image_path.substring(signature_image_path.indexOf(':'), signature_image_path.indexOf('+type')), course);
+       }
+       window.onload = loadImage();
      </script>
 
