@@ -144,3 +144,15 @@ share_url_color = certificate_primary_color if certificate_primary_color else "#
     height: 100
   });
 </script>
+<script>
+  // After loading the page switch the current course code for each source per signature image with 
+  // the course code for this certificate, where the course code is retreieved from the page url
+  (function (){ 
+    let page_url = window.location.href.replace('://', '');
+    let course = page_url.substring(page_url.indexOf(":"), page_url.indexOf('?'))
+    document.querySelectorAll('.signatory-signature').forEach(function(signature) {
+      var source = signature.src;
+      signature.src = source.replace(source.substring(source.split(':', 2).join(':').length, source.indexOf('+type')), course);
+    });
+  })();
+</script>
