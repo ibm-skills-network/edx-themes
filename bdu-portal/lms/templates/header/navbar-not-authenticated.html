@@ -21,10 +21,16 @@ from six import text_type
 %>
 <nav class="nav-links" aria-label=${_("Supplemental Links")}>
   <div class="main">
-    % for item_num, link in enumerate(settings.HEADER_NAVIGATION_LINKS, start=4):
-      <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-        <a class="tab-nav-link" href="${link['url']}">${link['title']}</a>
-      </div>
+    % for item_num, link in enumerate(settings.HEADER_NAVIGATION_LINKS, start=0):
+      % if link['visibility'] == 'public':
+        <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
+          % if link['url'][0] == '/':
+            <a class="tab-nav-link" href="${settings.PRIVATE_PORTAL_URL}${link['url']}">${link['title']}</a>
+          % else:
+            <a class="tab-nav-link" href="${link['url']}">${link['title']}</a>
+          % endif
+        </div>
+      % endif
     % endfor
   </div>
   <div class="secondary">
