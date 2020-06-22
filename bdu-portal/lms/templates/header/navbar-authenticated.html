@@ -30,7 +30,11 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
   <div class="main">
     % for item_num, link in enumerate(settings.HEADER_NAVIGATION_LINKS, start=0):
       <div class="mobile-nav-item hidden-mobile nav-item nav-tab">
-        <a class="tab-nav-link" href="${link['url']}">${link['title']}</a>
+        % if link['url'][0] == '/':
+          <a class="tab-nav-link" href="${settings.PRIVATE_PORTAL_URL}${link['url']}">${link['title']}</a>
+        % else:
+          <a class="tab-nav-link" href="${link['url']}">${link['title']}</a>
+        % endif
       </div>
     % endfor
   </div>
