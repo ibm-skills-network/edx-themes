@@ -19,7 +19,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="${marketing_link('PRIVACY')}">${_("Privacy Notice")}</a>
               </li>
-              % for item_num, link in enumerate(settings.FOOTER_NAVIGATION_LINKS, start=1):
+              % for item_num, link in enumerate(settings.FOOTER_NAVIGATION_LINKS, start=0):
               <li class="nav-item">
                 <a class="nav-link" href="${link['url']}">${link['title']}</a>
               </li>
