@@ -21,17 +21,15 @@
   >
     <div class="colophon">
 
-      <%doc>
       <nav class="nav-colophon" aria-label="${_('About')}">
         <ol>
-            % for item_num, link in enumerate(footer['navigation_links'], start=1):
+            % for item_num, link in enumerate(settings.FOOTER_NAVIGATION_LINKS, start=1):
             <li class="nav-colophon-0${item_num}">
-              <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
+              <a id="${link['title']}" href="${link['url']}">${link['title']}</a>
             </li>
             % endfor
         </ol>
       </nav>
-      </%doc>
 
       % if context.get('include_language_selector', footer_language_selector_is_enabled()):
           <%include file="${static.get_template_path('widgets/footer-language-selector.html')}"/>
