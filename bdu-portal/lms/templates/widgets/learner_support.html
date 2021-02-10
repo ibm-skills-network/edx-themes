@@ -14,18 +14,20 @@ import simplejson as json
   })
 %>
 
-% if settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_ENABLED', False) and settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_WIDGET_URL', False):
+% if settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_ENABLED', False) and settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_WIDGET_URL', False) and not settings.LEARNER_SUPPORT_CONFIG.get('OVERRIDE_DEFAULT_SUPPORT_TAB', False):
   <script type="text/javascript" src="${ settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_WIDGET_URL') }/support_widget.js") defer="defer"></script>
   <link rel="stylesheet" href="${ settings.LEARNER_SUPPORT_CONFIG.get('SUPPORT_WIDGET_URL') }/support_widget.css") defer="defer"/>
-  % if settings.LEARNER_SUPPORT_CONFIG.get('OVERRIDE_DEFAULT_SUPPORT_TAB', False):
-    <script>
-      ${settings.LEARNER_SUPPORT_CONFIG.get('CUSTOM_JS_SNIPPET', "")}
-    </script>
-  % else:
-    <script>
-      window.onload = function() {
-        createSupportTab(${ support_widget_config | n }, $);
-      };
-    </script>
-  % endif
+  <script>
+    window.onload = function() {
+      createSupportTab(${ support_widget_config | n }, $);
+    };
+  </script>
 % endif
+
+% if settings.LEARNER_SUPPORT_CONFIG.get('OVERRIDE_DEFAULT_SUPPORT_TAB', False):
+  <script>
+    ${settings.LEARNER_SUPPORT_CONFIG.get('CUSTOM_JS_SNIPPET', "") | n}
+  </script>
+% endif
+
+
