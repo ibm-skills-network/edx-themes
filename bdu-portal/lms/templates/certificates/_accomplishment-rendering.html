@@ -57,7 +57,7 @@ share_url_color = certificate_primary_color if certificate_primary_color else "#
                           <p class="accomplishment-statement-detail copy copy-lead" style="margin-bottom: 0px;color: #4e4e4e;">${Text(_("A course on {strong_start}{platform_url}{strong_end}")).format(strong_start=HTML("<strong style=\"color: " + platform_url_color + "\">"), strong_end=HTML("</strong>"), platform_url=strip_scheme(settings.PRIVATE_PORTAL_URL), )}</p>
                           <p style="color: #4e4e4e;">Powered by <strong>IBM Developer Skills Network.</strong></p>
                           <p style="margin-bottom:0;color: #4e4e4e;">Issued by</p>
-                          <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong style=\"color: " + platform_name_color + "\">"), strong_end=HTML("</strong>"), platform_name=platform_name, )}</p>
+                          <p>${Text(_("{strong_start}{platform_name}{strong_end}")).format(strong_start=HTML("<strong style=\"color: " + platform_name_color + "\">"), strong_end=HTML("</strong>"), platform_name=settings.CUSTOM_CERT_ISSUER)}</p>
                       </div>
 
 
