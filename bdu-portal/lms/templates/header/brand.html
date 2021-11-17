@@ -10,12 +10,12 @@ from django.utils.translation import ugettext as _
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 
 # App that handles subdomain specific branding
-from branding import api as branding_api
+from lms.djangoapps.branding import api as branding_api
 %>
 
 <h1 class="hd logo-header navbar-brand">
   <div class="logo">
-    <a class="navbar-brand" href="${settings.LOGO_LINK_URL if settings.LOGO_LINK_URL else '/portal/'}" itemprop="url">
+    <a class="navbar-brand" href="${settings.LOGO_LINK_URL if settings.LOGO_LINK_URL else '/dashboard'}" itemprop="url">
       <img class="logo-image" src="${static.url("images/logo.png")}" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}" itemprop="logo" />
     </a>
   </div>

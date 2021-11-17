@@ -10,11 +10,11 @@ from lms.djangoapps.ccx.overrides import get_current_ccx
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 
 # App that handles subdomain specific branding
-from branding import api as branding_api
+from lms.djangoapps.branding import api as branding_api
 %>
 
 <h1 class="header-logo">
-  <a href="${settings.LOGO_LINK_URL if settings.LOGO_LINK_URL else '/portal/'}">
+  <a href="${settings.LOGO_LINK_URL if settings.LOGO_LINK_URL else '/dashboard'}">
     <%block name="navigation_logo">
     <img  class="logo" src="${settings.LOGO_URL}" alt="${_("{platform_name} Home Page").format(platform_name=static.get_platform_name())}"/>
     </%block>
